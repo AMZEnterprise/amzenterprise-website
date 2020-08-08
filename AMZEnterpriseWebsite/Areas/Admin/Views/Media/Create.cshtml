@@ -1,0 +1,79 @@
+﻿@model Media
+
+@{
+    ViewData["Title"] = "ایجاد رسانه";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "رسانه ها");
+    PVModel.Add("Title", "ایجاد");
+    PVModel.Add("Style", "bg-success");
+    PVModel.Add("Icon", "fa fa-music");
+}
+
+@section Styles
+{
+
+    <link href="~/lib/dropzone/dropzone.css" rel="stylesheet" />
+
+    <style>
+
+        #uploader {
+            background: rgb(73, 72, 72);
+            border: white dashed 7px;
+            border-radius: 5px;
+            padding: 50px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+
+}
+@section Scripts{
+    <script src="~/lib/dropzone/dropzone.js"></script>
+
+    <script>
+
+        Dropzone.options.uploader = {
+            paramName: "file",
+            maxFilesize: 30,
+            accept: function(file, done) {
+                done();
+            }
+        };
+
+
+
+    </script>
+}
+
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <div id="dropzone">
+
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <strong>توجه : </strong>  حداکثر حجم فایل آپلود شده می تواند 30 مگابایت باشد.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form asp-action="Create" class="dropzone dz-clickable" id="uploader">
+
+                    <div class="dz-message">
+
+                        برای بارگذاری فایل آن را کشید و در این قسمت رها کنید ...<br>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

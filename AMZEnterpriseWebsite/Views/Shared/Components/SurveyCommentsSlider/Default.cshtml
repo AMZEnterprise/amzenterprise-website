@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SurveyComment>
+
+
+<!-- Testimonial Start -->
+<section class="testimonial-area area-mt">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12">
+                <div class="owl-carousel owl-theme" id="testimonials_owl_carousel">
+                    @foreach (var comment in Model)
+                    {
+                        <div class="testimonial-card item">
+                            <div class="testimonial-card-header">
+                                <span class="fa fa-quote-left"></span>
+                            </div>
+                            <div class="testimonial-card-body">
+                                <p>
+                                    @comment.Body
+                                </p>
+                                <span class="testimonial-user">
+                                    @comment.Username
+                                </span>
+                                <span class="testimonial-date">
+                                    @comment.DateTime.Date.ToPersianDateString()
+                                </span>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonial End -->

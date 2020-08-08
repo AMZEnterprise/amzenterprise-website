@@ -1,0 +1,68 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model AMZEnterpriseWebsite.Areas.Admin.Models.ViewModels.UserDetailsVM
+@{
+    ViewData["Title"] = "حذف کاربر";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "مدیریت کاربران");
+    PVModel.Add("Title", "حذف");
+    PVModel.Add("Style", "bg-danger");
+    PVModel.Add("Icon", "fa fa-users");
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime"></label>
+                <input type="text" value="@Model.DateTime.ToPersianDigitalDateTimeString()" disabled="disabled" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea class="form-control" cols="10" rows="6" disabled="disabled"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProfileImagePath"></label>
+                <br />
+                @{
+                    var imgSrc = "/" + FileUploadUtil.PathUserProfiles +"/" + Model.ProfileImagePath;
+                }
+                <img src="@imgSrc" alt="Profile Avatar" id="profile-img" />
+            </div>
+
+
+
+            <form asp-action="DeletePOST">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="حذف" class="btn btn-block btn-danger py-4" />
+            </form>
+
+        </div>
+    </div>
+</div>

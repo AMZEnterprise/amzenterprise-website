@@ -1,0 +1,54 @@
+﻿@model Setting
+
+<!-- Contact Start -->
+<section id="contact-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row contact-bar">
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12" data-aos="zoom-in-down">
+                <a href="tel:@Model.Phone1" class="contact-card">
+                    <div class="contact-card-header">
+                        <span class="fa fa-phone"></span>
+                        <span>تلفن همراه</span>
+                    </div>
+                    <div class="contact-card-body">
+                        <span>@Model.Phone1</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12" data-aos="zoom-in-down">
+                <a href="mailto:@Model.Email1" class="contact-card">
+                    <div class="contact-card-header">
+                        <span class="fa fa-envelope"></span>
+                        <span>ایمیل</span>
+                    </div>
+                    <div class="contact-card-body">
+                        <span>@Model.Email1</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12" data-aos="zoom-in-down">
+                <a href="http://www.github.com/@Model.SocialMedia1" class="contact-card">
+                    <div class="contact-card-header">
+                        <span class="fab fa-github"></span>
+                        <span>گیت هاب</span>
+                    </div>
+                    <div class="contact-card-body">
+                        <span>@Model.SocialMedia1</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12" data-aos="zoom-in-down">
+                <a href="http://t.me/@Model.SocialMedia1"; class="contact-card">
+                    <div class="contact-card-header">
+                        <span class="fab fa-telegram"></span>
+                        <span>تلگرام</span>
+                    </div>
+                    <div class="contact-card-body">
+                        <span>@Model.SocialMedia2</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact End -->

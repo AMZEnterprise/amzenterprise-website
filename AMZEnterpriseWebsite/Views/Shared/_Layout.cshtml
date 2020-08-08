@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="fa-IR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>@ViewBag.Title</title>
+
+
+    <link rel="icon" type="image/x-icon" href="~/img/favicon.ico">
+
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap-4.0.0-rtl-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-5.7.0/css/all.min.css" />
+
+
+
+    <link rel="stylesheet" href="~/lib/aos/aos.css" />
+
+    @RenderSection("Styles", required: false)
+
+
+
+
+    <link rel="stylesheet" href="~/css/default.css">
+
+</head>
+<body>
+    <!-- Navigation Bar Start -->
+    <header id="top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+
+            @await Component.InvokeAsync("NavbarLogo")
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline my-2 order-lg-2 order-md-1 order-sm-1 order-1" asp-controller="Search" asp-action="Index" method="get">
+                    <div class="input-group w-100">
+                        <input class="form-control" type="search" name="searchString" placeholder="جستجو برای ..." aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" title="جستجو">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="navbar-nav mr-auto  my-2 order-lg-1 order-md-2 order-sm-2 order-2">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" & ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Project" & ViewContext.RouteData.Values["Action"].ToString() == "Registration" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Project" asp-action="Registration">سفارش پروژه</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Project" & ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Project" asp-action="Index">پروژه ها</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Blog" & ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Blog" asp-action="Index">بلاگ</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" & ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Home" asp-action="Contact">تماس با من</a>
+                    </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" & ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Home" asp-action="About">درباره</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Navigation Bar End -->
+
+
+
+
+
+    @RenderBody()
+
+
+    @await Component.InvokeAsync("Footer")
+
+    <a href="#top" id="btn-go-top" class="smoothscroll"><span class="fa fa-angle-up"></span></a>
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap-4.0.0-rtl-dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/smooth-scroll.js"></script>
+
+    <script src="~/lib/aos/aos.js"></script>
+
+    <script src="~/js/default.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model SurveyComment
+
+@{
+    ViewData["Title"] = "ویرایش نظرسنجی";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "نظر سنجی سایت");
+    PVModel.Add("Title", "ویرایش");
+    PVModel.Add("Style", "bg-primary");
+    PVModel.Add("Icon", "fa fa-comment");
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Edit">
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="DateTime" />
+
+
+                <div class="form-group">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Body"></label>
+                    <textarea asp-for="Body" class="form-control" cols="10" rows="6"></textarea>
+                    <span asp-validation-for="Body" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status"></label>
+                    <select asp-for="Status" class="custom-select" asp-items="Html.GetEnumSelectList<SurveyCommentStatus>()"></select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="ذخیره" class="btn btn-block btn-primary py-4" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

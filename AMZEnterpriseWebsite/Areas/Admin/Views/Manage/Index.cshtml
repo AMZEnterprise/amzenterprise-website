@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+}
+
+
+
+<section id="topLabel">
+    <div class="container-fluid">
+        <div class="row text-white">
+            <div class="col-12">
+                <h2><span class="fa fa-users"></span> مدیریت کاربران</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<a asp-action="Create" class="btn btn-outline-success btn-block py-5 rounded-0 mt-1">
+    <span class="fa fa-plus"></span>
+    <span>اضافه کردن</span>
+</a>
+
+<div class="table-responsive mt-1">
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>آیدی</th>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>نام کاربری</th>
+                <th>ایمیل</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var counter = 0;
+            }
+            @foreach (var user in Model)
+            {
+                {
+                    var roles =await SignInManager.UserManager.GetRolesAsync(user);
+                    string colorRow = null;
+                    if ( roles.Contains(SD.AdminEndUser))
+                    {
+                        colorRow = "bg-secondary";
+                    }
+
+              
+                    <tr class="@(colorRow)">
+                        <td>@(++counter)</td>
+                        <td>@user.Id</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary" title="ویرایش">
+                                <span class="fa fa-pencil-alt"></span>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-warning" title="جزئیات">
+                                <span class="fa fa-list"></span>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger" title="حذف">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+
+
+    </table>
+</div>

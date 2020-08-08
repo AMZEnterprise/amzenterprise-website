@@ -1,0 +1,30 @@
+﻿@model Dictionary<string, string>;
+<section id="topLabel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 @Model["Style"] text-center py-5">
+                <h2>
+                    <span class="@Model["Icon"]"></span>
+                    <span>@Model["MainTitle"]</span>
+                    <span class="h4">@Model["Title"]</span>
+                </h2>
+            </div>
+            <div class="col-12 p-0">
+                @if (@Model.ContainsKey("BackLinkAction"))
+                {
+                    <a asp-controller="@Model["BackLinkController"]" asp-action="@Model["BackLinkAction"]" class="btn btn-danger btn-block rounded-0">
+                        <span class="fa fa-angle-right mr-3"></span>
+                        <span>بازگشت</span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Index" class="btn btn-danger btn-block rounded-0">
+                        <span class="fa fa-angle-right mr-3"></span>
+                        <span>بازگشت</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

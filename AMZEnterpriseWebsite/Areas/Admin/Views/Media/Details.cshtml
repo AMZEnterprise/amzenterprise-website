@@ -1,0 +1,68 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model Media
+
+@{
+    ViewData["Title"] = "جزئیات رسانه";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "رسانه ها");
+    PVModel.Add("Title", "جزئیات");
+    PVModel.Add("Style", "bg-warning");
+    PVModel.Add("Icon", "fa fa-music");
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+
+
+            @{
+                bool isImg = (MediaFileType)ViewData["MediaFileType"] == MediaFileType.Img;
+            }
+
+
+            @if (isImg)
+            {<div class="form-group">
+                    <div id="media-preview-box">
+                        <img src="@ViewData["MediaFilePath"]" alt="@Model.Name" />
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span>مشاهده فایل :</span>
+                <a href="@ViewData["MediaFilePath"]" class="text-danger">@Model.Name</a>
+            }
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input type="text" value="@Model.Name" disabled="disabled" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MediaFileType"></label>
+                <input type="text" value="@Model.MediaFileType" disabled="disabled" class="form-control" />
+            </div>
+
+            @{
+                var size = @Model.Size + "B" + " | " +
+                           FileUploadUtil.ByteToMegabyteConvert(@Model.Size) + "MB";
+            }
+
+            <div class="form-group">
+                <label asp-for="Size"></label>
+                <input type="text" value="@size" disabled="disabled" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DateTime"></label>
+                <input type="text" value="@Model.DateTime.ToPersianDigitalDateTimeString()" disabled="disabled" class="form-control" />
+            </div>
+
+            <a asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-block btn-danger py-4">حذف</a>
+        </div>
+    </div>
+</div>

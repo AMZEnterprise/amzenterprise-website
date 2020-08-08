@@ -1,0 +1,194 @@
+﻿@model Setting
+
+@{
+    ViewData["Title"] = "تنظیمات";
+}
+
+@section Styles
+{
+
+}
+
+@section Scripts
+{
+
+}
+<section id="topLabel">
+    <div class="container-fluid">
+        <div class="row text-white">
+            <div class="col-12">
+                <h2>
+                    <span class="fas fa-cogs"></span>
+                    تنظیمات
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Index" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="setting-group-panel">
+                    <p class="setting-group-panel-header">تظیمات اصلی سایت</p>
+                    <div class="form-group">
+                        <label asp-for="SiteName"></label>
+                        <input asp-for="SiteName" class="form-control" />
+                        <span asp-validation-for="SiteName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SiteLogo"></label>
+                        <input type="file" name="files" class="form-control" accept="image/*" />
+                        <input type="hidden" asp-for="SiteLogo"/>
+                        <span asp-validation-for="SiteLogo"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="setting-group-panel">
+                    <p class="setting-group-panel-header">تنظیمات متا صفحه اصلی</p>
+
+                    <div class="form-group">
+                        <label asp-for="HomeMetaTitle"></label>
+                        <input asp-for="HomeMetaTitle" class="form-control" />
+                        <span asp-validation-for="HomeMetaTitle"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="HomeMetaKeywords"></label>
+                        <input asp-for="HomeMetaKeywords" class="form-control" />
+                        <span asp-validation-for="HomeMetaKeywords"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="HomeMetaDescription"></label>
+                        <input asp-for="HomeMetaDescription" class="form-control" />
+                        <span asp-validation-for="HomeMetaDescription"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="setting-group-panel">
+                    <p class="setting-group-panel-header">اطلاعات تماس</p>
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia1"></label>
+                        <input asp-for="SocialMedia1" class="form-control" />
+                        <span asp-validation-for="SocialMedia1"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia2"></label>
+                        <input asp-for="SocialMedia2" class="form-control" />
+                        <span asp-validation-for="SocialMedia2"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia3"></label>
+                        <input asp-for="SocialMedia3" class="form-control" />
+                        <span asp-validation-for="SocialMedia3"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia4"></label>
+                        <input asp-for="SocialMedia4" class="form-control" />
+                        <span asp-validation-for="SocialMedia4"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia5"></label>
+                        <input asp-for="SocialMedia5" class="form-control" />
+                        <span asp-validation-for="SocialMedia5"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia6"></label>
+                        <input asp-for="SocialMedia6" class="form-control" />
+                        <span asp-validation-for="SocialMedia6"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia7"></label>
+                        <input asp-for="SocialMedia7" class="form-control" />
+                        <span asp-validation-for="SocialMedia7"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SocialMedia8"></label>
+                        <input asp-for="SocialMedia8" class="form-control" />
+                        <span asp-validation-for="SocialMedia8"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Phone1"></label>
+                        <input asp-for="Phone1" class="form-control" />
+                        <span asp-validation-for="Phone1"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Phone2"></label>
+                        <input asp-for="Phone2" class="form-control" />
+                        <span asp-validation-for="Phone2"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Phone3"></label>
+                        <input asp-for="Phone3" class="form-control" />
+                        <span asp-validation-for="Phone3"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Email1"></label>
+                        <input asp-for="Email1" class="form-control" />
+                        <span asp-validation-for="Email1"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email2"></label>
+                        <input asp-for="Email2" class="form-control" />
+                        <span asp-validation-for="Email2"></span>
+                    </div>
+                </div>
+                
+                
+                <div class="setting-group-panel">
+                    <p class="setting-group-panel-header">اطلاعات تماس</p>
+
+                    <div class="form-group">
+                        <label asp-for="BankId"></label>
+                        <input asp-for="BankId" class="form-control" />
+                        <span asp-validation-for="BankId"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="BitcoinWalletKey"></label>
+                        <input asp-for="BitcoinWalletKey" class="form-control" />
+                        <span asp-validation-for="BitcoinWalletKey"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group mt-3">
+                    <input type="submit" value="ثبت تفییرات" class="btn btn-block btn-primary py-4" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,38 @@
+﻿@model MyProgress
+
+@{
+    ViewData["Title"] = "ایجاد توانایی";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "توانایی ها");
+    PVModel.Add("Title", "ایجاد");
+    PVModel.Add("Style", "bg-success");
+    PVModel.Add("Icon", "fa fa-paint-brush");
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Create">
+
+                <div class="form-group">
+                    <label asp-for="Topic"></label>
+                    <input asp-for="Topic" class="form-control" />
+                    <span asp-validation-for="Topic" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProgressValuePercentage"></label>
+                    <input asp-for="ProgressValuePercentage" class="form-control" />
+                    <span asp-validation-for="ProgressValuePercentage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="ایجاد" class="btn btn-block btn-success py-4" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

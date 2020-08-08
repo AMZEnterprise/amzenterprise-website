@@ -1,0 +1,46 @@
+﻿
+#galleryModal {
+    z-index: 10011;
+}
+
+.gallery-grid-item {
+    display: block;
+    position: relative;
+}
+
+    .gallery-grid-item img {
+        cursor: pointer;
+        border: 10px solid transparent;
+        transition: all .2s ease-in-out;
+    }
+
+.gallery-selected {
+    transition: all .2s ease-in-out;
+    border: 5px solid rgb(138, 9, 219) !important;
+}
+
+.gallery-caption {
+    display: block;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+    z-index: 1000000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#gallery-emptyMessage {
+    font-size: 2rem;
+    color: var(--danger);
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+#gallery-selected-items-grid img {
+    width: 100%;
+    height: 130px;
+}

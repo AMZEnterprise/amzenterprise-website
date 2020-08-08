@@ -1,0 +1,90 @@
+﻿@using System.Reflection
+@model AMZEnterpriseWebsite.Models.ViewModels.FooterVM
+
+
+
+<footer id="footer-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row" id="footer-first-row">
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12" id="footer-links">
+                <div id="footer-links-social">
+                    <p class="footer-section-header">
+                        <span class="footer-section-header-border">من</span>
+                        را دنبال کنید
+                    </p>
+                    <ul>
+                        @{
+                            string telegramLink = "http://t.me/" + @Model.Setting.SocialMedia2;
+                            string instagramLink = "http://instagram.com/" + @Model.Setting.SocialMedia3;
+                            string phone = "tel:" + @Model.Setting.Phone1;
+                            string linkedInLink = "http://linkedin.com/" + @Model.Setting.SocialMedia4;
+                        }
+                        <li>
+                            <a href=@telegramLink><span class="fab fa-telegram-plane"></span></a>
+                        </li>
+                        <li>
+                            <a href=@instagramLink><span class="fab fa-instagram"></span></a>
+                        </li>
+                        <li>
+                            <a href=@phone><span class="fa fa-phone"></span></a>
+                        </li>
+                        <li>
+                            <a href=@linkedInLink><span class="fab fa-linkedin"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="footer-links-contact">
+                    <ul class="text-left">
+                        <li>
+                            <span>تلفن همراه</span>
+                            <span>:</span>
+                            <span>@Model.Setting.Phone2</span>
+                        </li>
+                        <li>
+                            <span>ایمیل</span>
+                            <span>:</span>
+                            <span>@Model.Setting.Email2</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12" id="footer-description">
+                <p class="footer-section-header">
+                    <span class="footer-section-header-border">درباره</span>
+                </p>
+                <h1 class="h4" id="footer-logo">@Model.Setting.SiteName</h1>
+                <p class="text-effect">
+                    محیطی ایمن و راحت جهت سفارش پروژه های مختلف
+                    کدنویسی شما است. به راحتی میتوانید
+                    پروژه های برنامه نویسی خود را ثبت کنید و همچنین از مطالب
+                    علمی و مفید این سایت بهره ببرید. این وبسایت ، وبسایت شخصی من هست
+                    جهت به اشتراک گذاشتن مطالب مفید دنیای کامپیوتر و همچنین معرفی
+                    نمونه کارها و دستاورد هایم.
+                </p>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                <p class="footer-section-header">
+                    <span class="footer-section-header-border">برچسب های</span>
+                    پر بازدید
+                </p>
+                <div id="footer-tags">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <a asp-controller="Search" asp-action="SearchByTag" asp-route-id="@tag.Id">@tag.Name</a>
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div class="row" id="footer-second-row">
+            <div class="col-12">
+                ساخته شده با
+                <span class="fa fa-heart"></span>
+                <br />
+                <span>@Model.Setting.SiteName @DateTime.Now.Year</span>
+                <span>|</span>
+                <span>نسخه @Assembly.GetEntryAssembly().GetName().Version</span>
+            </div>
+        </div>
+    </div>
+</footer>

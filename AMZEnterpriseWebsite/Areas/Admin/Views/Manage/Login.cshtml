@@ -1,0 +1,48 @@
+﻿@model AMZEnterpriseWebsite.Areas.Admin.Models.ViewModels.UserLoginVM
+@{
+    Layout = "_LayoutManage";
+
+    ViewData["Title"] = "ورود";
+}
+<div class="login-card">
+    <div class="login-card-header">
+        <img src="~/img/panel/amzenterprise-logo.png" alt="AMZ Enterprise" />
+    </div>
+    <div class="login-card-body">
+        <form asp-action="Login" method="post">
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+
+            <div class="input-group">
+                <span class="input-group-text text-primary">
+                    <span class="fa fa-user"></span>
+                </span>
+                <input asp-for="Username" placeholder="@Html.DisplayNameFor(u=>u.Username)" class="form-control" />
+            </div>
+            <span asp-validation-for="Username"></span>
+
+            <div class="input-group mt-1">
+                <span class="input-group-text text-primary">
+                    <span class="fa fa-key"></span>
+                </span>
+                <input asp-for="Password" placeholder="@Html.DisplayNameFor(u=>u.Password)" class="form-control" />
+                <br />
+            </div>
+            <span asp-validation-for="Password"></span>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="ورود" class="btn btn-primary btn-block py-4" />
+            </div>
+
+            <label class="container">
+                @Html.DisplayNameFor(m => m.RememberMe)
+                <input type="checkbox" asp-for="RememberMe">
+                <span class="checkmark"></span>
+            </label>
+
+            <div class="form-group text-center">
+                <a asp-controller="Manage" asp-action="ForgotPassword" class="text-danger">فراموشی کلمه عبور</a>
+            </div>
+        </form>
+    </div>
+</div>
+<a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-dark btn-block mt-1">بازگشت به وبسایت</a>

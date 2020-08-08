@@ -1,0 +1,11 @@
+﻿@model int
+
+<a asp-action="Edit" asp-route-id="@Model" class="btn btn-primary" title="ویرایش">
+    <span class="fa fa-pencil-alt"></span>
+</a>
+<a asp-action="Details" asp-route-id="@Model" class="btn btn-warning" title="جزئیات">
+    <span class="fa fa-list"></span>
+</a>
+<a asp-action="Delete" asp-route-id="@Model" class="btn btn-danger" title="حذف">
+    <span class="fa fa-trash"></span>
+</a>

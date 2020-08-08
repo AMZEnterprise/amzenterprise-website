@@ -1,0 +1,123 @@
+﻿@model Project
+
+@{
+    ViewData["Title"] = "ایجاد پروژه";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "پروژه ها");
+    PVModel.Add("Title", "ایجاد");
+    PVModel.Add("Style", "bg-success");
+    PVModel.Add("Icon", "fa fa-code");
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/amz-gallerybrowser/amz-gallerybrowser.css" />
+}
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/ckeditor_4.12.1_full/ckeditor.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/config.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/adapters/jquery.js"></script>
+
+    <script src="~/lib/amz-gallerybrowser/amz-gallerybrowser.js"></script>
+    <script type="text/javascript">
+
+
+        AMZGalleryBrowser.Init({
+            url: "/api/AMZGalleryBrowser/GetGallery",
+            urlGetMediaInfo: "/api/AMZGalleryBrowser/GetGalleryItemDetails",
+            multipleGridId: "multipleGrid",
+            itemsPerPage: 8,
+            selectionType: "multiple",
+            ckeditorId: "txtContent"
+        });
+
+
+        //Set Selected Items Ids To Hidden Input
+        $('form').submit(function (e) {
+            var validator = $('form').validate();
+            //If form was valid
+            if (validator.checkForm()) {
+
+                let itemsArray = GetSelectedItemsArray();
+                let Ids = "";
+                for (let i = 0; i < itemsArray.length; i++) {
+                    Ids += itemsArray[i] + ",";
+                    console.log(itemsArray[i]);
+                }
+
+                document.getElementById("input-mediasIds").value = Ids;
+
+            } else {
+                e.preventDefault();
+            }
+
+        });
+    </script>
+
+}
+
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Create">
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="ProjectType"></label>
+                    <select asp-for="ProjectType" class="custom-select" asp-items="Html.GetEnumSelectList<ProjectType>()"></select>
+                    <span asp-validation-for="ProjectType"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea id="txtContent" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description"></span>
+                </div>
+
+
+                <div class="form-group">
+
+                    @if (TempData["ErrorMsg"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><span class="fa fa-times-circle"></span></strong>
+                            @TempData["ErrorMsg"]
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                    <label asp-for="ProjectAndMedias"></label>
+
+                    <input type="hidden" name="mediasIds" id="input-mediasIds"/>
+
+                    <button class="btn btn-danger d-block" type="button" id="btn-selectMedia-media-mutliple">انتخاب رسانه ها</button>
+                    <div id="multipleGrid"></div>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="ایجاد" class="btn btn-block btn-success py-4" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("PartialViews/_GalleryBrowserPV")

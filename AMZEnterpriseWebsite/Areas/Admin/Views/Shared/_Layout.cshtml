@@ -1,0 +1,142 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@inject IHttpContextAccessor HttpContextAccessor
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"] - پنل مدیریت</title>
+
+
+    <link rel="icon" type="image/x-icon" href="~/img/favicon.ico">
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap-4.0.0-rtl-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-5.7.0/css/all.min.css" />
+
+
+    <link rel="stylesheet" href="~/css/admin-panel-default.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand text-danger mr-4 ml-4">پنل مدیریت</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarTop">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="NavbarTop">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a asp-controller="Posts" asp-action="Index" class="nav-link">پست ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Categories" asp-action="Index" class="nav-link">دسته بندی ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Tags" asp-action="Index" class="nav-link">بر چسب ها</a>
+                    </li>
+
+                    @if (User.IsInRole(SD.AdminEndUser))
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="Projects" asp-action="Index" class="nav-link"> پروژه ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="ProjectRegisters" asp-action="Index" class="nav-link"> سفارش ها</a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a asp-controller="Media" asp-action="Index" class="nav-link">رسانه ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Comments" asp-action="Index" class="nav-link">نظرات</a>
+                    </li>
+
+                    @if (User.IsInRole(SD.AdminEndUser))
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="MyProgresses" asp-action="Index" class="nav-link">توانایی های من</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="SurveyComments" asp-action="Index" class="nav-link">نظرسنجی سایت</a>
+                        </li>
+                    }
+
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link dropdown-toggle mr-2" id="userSetting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i><span id="username"> @User.Identity.Name </span> </a>
+                        <div class="dropdown-menu">
+                            @{
+                                var currentUser = await UserManager.GetUserAsync(Context.User);
+                            }
+                            <a asp-controller="Manage" asp-action="Details" asp-route-id="@currentUser.Id" class="dropdown-item"><i class="fa fa-edit mr-3"></i>پروفایل</a>
+                        </div>
+                    </li>
+
+                    @if (User.IsInRole(SD.AdminEndUser))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Settings" asp-action="Index"><i class="fa fa-cogs mr-3"></i>تنظیمات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Manage" asp-action="Index"><i class="fa fa-users mr-2"></i>مدیریت کاربران</a>
+                        </li>
+                    }
+
+
+                    <li class="nav-item">
+                        <form method="post" asp-controller="Manage" asp-action="Logout">
+                            <button type="submit" class="btn btn-danger">خروج</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <partial name="_CookieConsentPartial" />
+
+    @RenderBody()
+
+
+
+    <footer class="mt-5 fixed-bottom">
+        <div class="container-fluid">
+            <div class="row pt-2 bg-secondary text-white text-center">
+                <div class="col-12">
+                    @DateTime.Now.ToPersianDateString() - &copy; AMZ Enterprise
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+
+    </environment>
+
+    <script type="text/javascript" src="~/lib/popper.js/umd/popper.min.js"></script>
+
+    <script src="~/lib/bootstrap-4.0.0-rtl-dist/js/bootstrap.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

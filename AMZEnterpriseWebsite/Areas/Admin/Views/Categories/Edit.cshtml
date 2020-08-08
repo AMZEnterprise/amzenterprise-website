@@ -1,0 +1,47 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "ویرایش دسته";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "دسته بندی ها");
+    PVModel.Add("Title", "ویرایش");
+    PVModel.Add("Style", "bg-primary");
+    PVModel.Add("Icon", "fa fa-list-ul");
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="ParentId"></label>
+                    @Html.DropDownList("ParentId", (SelectList)ViewBag.ParentId, "دسته بندی پیشفرض (ندارد)", new { @class = "form-control" })
+                    <span asp-validation-for="ParentId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UrlName"></label>
+                    <input asp-for="UrlName" class="form-control" />
+                    <span asp-validation-for="UrlName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="ذخیره" class="btn btn-block btn-primary py-4">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

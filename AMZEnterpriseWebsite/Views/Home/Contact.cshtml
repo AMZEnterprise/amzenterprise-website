@@ -1,0 +1,93 @@
+﻿@model SurveyComment
+@{
+    ViewData["Title"] = "تماس با من";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css" />
+}
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/OwlCarousel2/owl.carousel.min.js"></script>
+    <script>
+        website.slideShow('#testimonials_owl_carousel');
+    </script>
+}
+
+@await Html.PartialAsync("PartialViews/_BreadcrumbPV")
+
+<section id="contact-me-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+                <img src="~/img/svg/contact.svg" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+                <div class="col-12 area-title">
+                    <p>ارتباط با من</p>
+                </div>
+                <div data-aos="zoom-in-up">
+                    <p class="text-effect">
+                        در وبسایت من می توانید پروژه های کدنویسی و برنامه نویسی خود را به راحتی
+                        ثبت کنید و من در کمترین زمان ممکن و با بهترین کیفیت و قیمت مناسب آن را برای شما
+                        آماده می کنم.
+                        <br />
+                        مجموعه فعالیت های معمولا به صورت شخصی انجام شده و برخی از پروژه ها
+                        نیز به صورت تیمی انجام می گردند.
+                        <br />
+                        شما از طریق فرم نظر سنجی زیر می توانید نظرات و پشنهادات خود
+                        را به اطلاع من برسانید. پشنهادات و انتقادات شما
+                        عزیزان به بهتر شدن موضوعات وبسایت و همچنین برنامه های آتی وبسایت
+                        و این مجموعه کمک فراوانی خواهد کرد . پیشاپیش از نظرات شما سپاس گذاریم.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="contact-me-form">
+            <div class="col-12 area-title">
+                <p>نظر سنجی</p>
+            </div>
+            <div class="col-8 col-md-10 col-sm-12 col-12 m-auto">
+
+                <form asp-action="Contact" method="post">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12" data-aos="zoom-in-up">
+                            <div class="form-group">
+                                <input type="text" asp-for="Username" class="form-control" placeholder="نام">
+                                <span asp-validation-for="Username"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12" data-aos="zoom-in-up">
+                            <div class="form-group">
+                                <input type="text" asp-for="Email" class="form-control" placeholder="ایمیل">
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-sm-12 col-12" data-aos="zoom-in-up">
+                            <div class="form-group">
+                                <textarea asp-for="Body" cols="30" rows="6" class="form-control" placeholder="نظر شما"></textarea>
+                                <span asp-validation-for="Body"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary px-5 py-3" data-aos="zoom-in-up">
+                        ارسال نظر
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+@await Component.InvokeAsync("SurveyCommentsSlider")
+
+
+@await Component.InvokeAsync("ContactBar")

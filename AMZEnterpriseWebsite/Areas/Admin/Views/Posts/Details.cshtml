@@ -1,0 +1,109 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = "جزئیات پست";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "پست ها");
+    PVModel.Add("Title", "جزئیات");
+    PVModel.Add("Style", "bg-warning");
+    PVModel.Add("Icon", "fa fa-newspaper");
+}
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/amz-gallerybrowser/amz-gallerybrowser.css" />
+}
+@section Scripts {
+    <script src="~/lib/ckeditor_4.12.1_full/ckeditor.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/config.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/adapters/jquery.js"></script>
+
+
+    <script src="~/lib/amz-gallerybrowser/amz-gallerybrowser.js"></script>
+    <script>
+        AMZGalleryBrowser.Init({
+            url: "/api/AMZGalleryBrowser/GetGallery",
+            itemsPerPage: 8,
+            selectionType: "single",
+            ckeditorId: "txtContent",
+            isEditorReadOnly:true
+        });
+
+
+        $.ajax({
+            url: "/api/AMZGalleryBrowser/GetGalleryItemDetails",
+            data: {
+                id: @Model.MediaId
+            },
+            dataType: "json",
+            success: function (data) {
+                document.getElementById("media-preview").setAttribute("src", data.link);
+            }
+        });
+
+    </script>
+
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input type="text" value="@Model.Title" disabled="disabled" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <img src="~/img/panel/gallery-browser/img.png" alt="" class="img-fluid mt-5" id="media-preview" />
+                <input type="hidden" asp-for="MediaId" id="input-mediaId" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Body"></label>
+                <textarea id="txtContent" asp-for="Body"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PostAndTags"></label>
+                <div id="post-tags-box">
+                    @foreach (var tag in Model.PostAndTags)
+                    {
+                        <span>@tag.Tag.Name</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status"></label>
+                <input type="text" value="@Html.DisplayFor(m=>Model.Status)" disabled="disabled" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <input type="text" value="@Model.Category.Name" disabled="disabled" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="LastEditDate"></label>
+                <input type="text" value="@Model.LastEditDate.ToPersianDigitalDateTimeString()" disabled="disabled" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="DateTime"></label>
+                <input type="text" value="@Model.DateTime.ToPersianDigitalDateTimeString()" disabled="disabled" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IsCommentsOn"></label>
+                <input type="text" class="form-control" disabled="disabled" value="@(Model.IsCommentsOn?"بله" : "خیر")" />
+            </div>
+
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-block btn-primary py-4">ویرایش</a>
+        </div>
+    </div>
+</div>

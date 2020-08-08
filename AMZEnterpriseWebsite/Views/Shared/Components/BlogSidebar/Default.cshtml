@@ -1,0 +1,121 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model AMZEnterpriseWebsite.Models.ViewModels.BlogVM
+
+<div class="col-lg-3 col-md-12 col-sm-12 col-12 order-lg-0 order-md-1 order-sm-1 order-1" id="blog-sidebar">
+    <div class="row">
+        <div class="col-12" id="blog-sidebsar-cats">
+            <div class="blog-sidebar-section">
+                <div class="blog-sidebar-section-header">
+                    <span class="fa fa-list"></span>
+                    <span class="blog-sidebar-section-title">دسته بندی ها</span>
+                </div>
+                <div class="blog-sidebar-section-body">
+                    <ul>
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <li>
+                                <a asp-controller="Search" asp-action="SearchByCategory" asp-route-id="@cat.Id">@cat.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" id="blog-sidebar-latests">
+            <div class="blog-sidebar-section">
+                <div class="blog-sidebar-section-header">
+                    <span class="fa fa-newspaper"></span>
+                    <span class="blog-sidebar-section-title">جدیدترین مطالب</span>
+                </div>
+                <div class="blog-sidebar-section-body">
+                    @foreach (var post in Model.Posts)
+                    {
+                    <a asp-controller="Blog" asp-action="Posts" asp-route-id="@post.Id" class="latest-post-card">
+                        <div class="latest-post-card-left">
+                            <img src="@MediaSourceInView.GetSource(post.Media)" alt="@post.Title">
+                        </div>
+                        <div class="latest-post-card-right">
+                            <span>@post.Title</span>
+                        </div>
+                    </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12" id="blog-sidebar-archives">
+            <div class="blog-sidebar-section">
+                <div class="blog-sidebar-section-header">
+                    <span class="fa fa-clock"></span>
+                    <span class="blog-sidebar-section-title">آرشیو مطالب</span>
+                </div>
+                <div class="blog-sidebar-section-body">
+                    <ul>
+                        @foreach (var date in Model.ArchivesDate)
+                        {
+                            <li>
+                                <a asp-controller="Search" asp-action="SearchByArchiveDate" asp-route-archiveYear="@date.Year" asp-route-archiveMonth="@date.Month">
+                                    @{
+                                        DateTime dateTime = new DateTime(date.Year, date.Month, 1);
+                                    }
+                                    @dateTime.ToPersianDateTime().MonthName ماه @dateTime.ToPersianDateTime().Year
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" id="blog-sidebar-links">
+            <div class="blog-sidebar-section">
+                <div class="blog-sidebar-section-header">
+                    <span class="fa fa-link"></span>
+                    <span class="blog-sidebar-section-title">پیوندها</span>
+                </div>
+                <div class="blog-sidebar-section-body">
+                    <ul>
+                        <li>
+                            <a href="#">صفحه اصلی</a>
+                        </li>
+                        <li>
+                            <a href="#">صفحه اصلی</a>
+                        </li>
+                        <li>
+                            <a href="#">صفحه اصلی</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" id="blog-sidebar-tags">
+            <div class="blog-sidebar-section">
+                <div class="blog-sidebar-section-header">
+                    <span class="fa fa-tag"></span>
+                    <span class="blog-sidebar-section-title">برچسب های اخیر</span>
+                </div>
+                <div class="blog-sidebar-section-body">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <a asp-controller="Search" asp-action="SearchByTag" asp-route-id="@tag.Id">
+                            @tag.Name
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12" id="blog-sidebar-ads">
+            <div class="blog-sidebar-section">
+                <div class="blog-sidebar-section-header">
+                    <span class="fa fa-ad"></span>
+                    <span class="blog-sidebar-section-title">تبلیغات</span>
+                </div>
+                <div class="blog-sidebar-section-body">
+                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

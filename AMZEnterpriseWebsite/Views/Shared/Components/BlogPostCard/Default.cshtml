@@ -1,0 +1,43 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model Post
+<div class="blog-card">
+    <div class="blog-card-header">
+        <div class="row text-center">
+            <div class="col-lg-5 col-md-6 col-sm-12 col-12">
+                <span class="fa fa-user"></span>
+                <span>
+                    @{
+                        var username = Model.User.FirstName + " " + Model.User.LastName;
+                    }
+                    @username
+                </span>
+            </div>
+            <div class="col-lg-5 col-md-6 col-12">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+                        <span class="fa fa-clock"></span>
+                        <span>@Model.DateTime.ToPersianDigitalDateTimeString()</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <span class="fa fa-comment"></span>
+                        <span>
+                            @Model.Comments.Count
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="@MediaSourceInView.GetSource(Model.Media)" alt="@Model.Title">
+    </div>
+    <div class="blog-card-body">
+        <p class="blog-card-body-title">
+            @Model.Title
+        </p>
+        <div class="blog-card-body-text">
+            @Html.Raw(Model.Body)
+        </div>
+    </div>
+    <div class="blog-card-footer">
+        <a asp-controller="Blog" asp-action="Posts" asp-route-id="@Model.Id" class="btn btn-primary">ادامه مطلب ...</a>
+    </div>
+</div>

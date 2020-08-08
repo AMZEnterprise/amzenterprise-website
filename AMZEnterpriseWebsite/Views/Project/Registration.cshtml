@@ -1,0 +1,79 @@
+﻿@model ProjectRegister
+@{
+    ViewData["Title"] = "ثبت سفارش";
+}
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+@await Html.PartialAsync("PartialViews/_BreadcrumbPV")
+
+<!-- Project Registration Start -->
+<section id="project-register-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+
+                @if (TempData["IsSuccess"] != null)
+                {
+                    if ((bool)TempData["IsSuccess"])
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong><span class="fa fa-check-circle"></span></strong>
+                            پروژه شما با موفقیت ثبت شد.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                }
+
+
+
+                <form asp-action="Registration">
+                    <div class="form-group">
+                        <label asp-for="FullName" ></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title" ></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProjectType" ></label>
+                        <select asp-for="ProjectType" asp-items="Html.GetEnumSelectList<ProjectType>()" class="form-control custom-select"></select>
+                        <span asp-validation-for="ProjectType"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone" ></label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SocialMediaAccount" ></label>
+                        <input asp-for="SocialMediaAccount" class="form-control" />
+                        <span asp-validation-for="SocialMediaAccount"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" ></label>
+                        <textarea class="form-control" asp-for="Description" cols="10" rows="6"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="ثبت سفارش" class="btn btn-block btn-secondary py-4" />
+                    </div>
+                </form>
+                <p class="text-center">پس از ثبت درخواست پروژه طی 24 ساعت آینده جهت همکاری و تکمیل درخواست با شما تماس گرفته خواهد شد.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- Project Registration Start -->

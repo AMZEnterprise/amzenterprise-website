@@ -1,0 +1,57 @@
+﻿<div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="galleryModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <button type="button" class="close bg-danger px-5 ml-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-white">&times;</span>
+                </button>
+                <h5 class="modal-title w-50" id="galleryModalTitle">
+                    رسانه ها
+                </h5>
+            </div>
+            <div class="modal-body text-dark">
+
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="input-group">
+                                <span class="input-group-prepend btn btn-dark" id="btn-seach">
+                                    <span class="fa fa-search"></span>
+                                </span>
+                                <input type="text" name="searchString" id="txtSearch" class="form-control" placeholder="عنوان فایل ..." />
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row mt-3">
+                                <div class="col-9" id="filter-btns">
+                                    <button class="btn btn-dark" data-filetype="img">تصویر</button>
+                                    <button class="btn btn-dark" data-filetype="sound">صوت</button>
+                                    <button class="btn btn-dark" data-filetype="video">ویدیو</button>
+                                    <button class="btn btn-dark" data-filetype="other">سایر موارد</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <div class="row" id="pagination-btns">
+                                <div class="col-6">
+                                    <button class="btn btn-block btn-primary" id="btnNext" data-nextpage="">بعدی</button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-block btn-primary" id="btnPrev" data-prevpage="">قبلی</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12" id="gallery-panel">
+                            <div class="row" id="gallery-grid"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

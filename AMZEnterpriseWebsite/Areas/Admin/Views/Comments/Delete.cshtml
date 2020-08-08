@@ -1,0 +1,59 @@
+﻿@model Comment
+
+@{
+    ViewData["Title"] = "حذف نظر";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "نظر ها");
+    PVModel.Add("Title", "حذف");
+    PVModel.Add("Style", "bg-danger");
+    PVModel.Add("Icon", "fa fa-comment");
+}
+
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+
+
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <div class="form-group">
+                <label asp-for="PostId"></label>
+                <input type="text" value="@ViewBag.PostTitle" disabled="disabled" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" disabled="disabled" />
+            </div>
+ 	    <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" disabled="disabled" />
+               	<span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Body"></label>
+                <textarea cols="10" rows="6" asp-for="Body" class="form-control" disabled="disabled"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status"></label>
+                <input type="text" value="@Html.DisplayFor(m=>Model.Status)" disabled="disabled" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Ip"></label>
+                <input asp-for="Ip" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime"></label>
+                <input type="text" value="@Model.DateTime.ToPersianDigitalDateTimeString()" disabled="disabled" class="form-control" />
+            </div>
+
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="حذف" class="btn btn-block btn-danger py-4" />
+            </form>
+        </div>
+    </div>
+</div>

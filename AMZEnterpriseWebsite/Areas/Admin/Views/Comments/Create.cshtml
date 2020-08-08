@@ -1,0 +1,99 @@
+﻿@model Comment
+
+@{
+    ViewData["Title"] = "ایجاد نظر";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "نظر ها");
+    PVModel.Add("Title", "ایجاد");
+    PVModel.Add("Style", "bg-success");
+    PVModel.Add("Icon", "fa fa-comment");
+}
+
+@section Styles
+{
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script>
+
+        $("#postId").change(function (e) {
+
+            //clear select box
+            $('.js-parentComment-input').val("");
+
+            GetParentComments();
+        });
+
+        GetParentComments();
+
+        function GetParentComments() {
+            $('.js-parentComment-input').select2({
+                multiple: false,
+                dir: "rtl",
+                ajax: {
+                    url: '/Admin/Comments/GetParentComments',
+                    width: 'resolve',
+                    data: function (params) {
+                        return {
+                            q: params.term,// search term
+                            postId: $("#postId").val()
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.items
+                        };
+                    },
+                    minimumInputLength: 2
+                }
+            });
+        }
+
+        $('form').submit(function (e) {
+            var validator = $('form').validate();
+            //If form was valid
+            if (validator.checkForm()) {
+                $('#parentComment').val($('.js-parentComment-input').select2('val'));
+            } else {
+                e.preventDefault();
+            }
+        });
+
+    </script>
+}
+
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Create">
+               
+                <div class="form-group">
+                    <label asp-for="ParentId"></label>
+                    <select class="js-parentComment-input custom-select" asp-for="ParentId"></select>
+                    <span asp-validation-for="ParentId"></span>
+                    <input type="hidden" id="parentComment" name="parentComment" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostId"></label>
+                    <select asp-for="PostId" class="custom-select" asp-items="ViewBag.PostId" id="postId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Body"></label>
+                    <textarea cols="10" rows="6" asp-for="Body" class="form-control"></textarea>
+                    <span asp-validation-for="Body" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="ایجاد" class="btn btn-block btn-success py-4" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

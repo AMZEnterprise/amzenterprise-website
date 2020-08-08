@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Razor.Language.Intermediate
+@model Project
+
+@{
+    ViewData["Title"] = "جزئیات پروژه";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "پروژه ها");
+    PVModel.Add("Title", "جزئیات");
+    PVModel.Add("Style", "bg-warning");
+    PVModel.Add("Icon", "fa fa-code");
+}
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/amz-gallerybrowser/amz-gallerybrowser.css" />
+}
+@section Scripts
+{
+
+    <script src="~/lib/ckeditor_4.12.1_full/ckeditor.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/config.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/adapters/jquery.js"></script>
+
+    <script src="~/lib/amz-gallerybrowser/amz-gallerybrowser.js"></script>
+    <script>
+        AMZGalleryBrowser.Init({
+            url: "/api/AMZGalleryBrowser/GetGallery",
+            urlGetMediaInfo: "/api/AMZGalleryBrowser/GetGalleryItemDetails",
+            multipleGridId: "multipleGrid",
+            itemsPerPage: 8,
+            selectionType: "multiple",
+            ckeditorId: "txtContent",
+            isEditorReadOnly: true
+        });
+
+        $.ajax({
+            url: "/api/AMZGalleryBrowser/GetAProjectMedias",
+            data: {
+                id: @Model.Id
+            },
+            dataType: "json",
+            success: function(data) {
+
+                for (var i = 0; i < data.length; i++) {
+
+                    PrintSingleItemFromAjaxData(data[i], data[i].id);
+                    AddToSelectedItemsArray(data[i].id.toString());
+                }
+            }
+        });
+    </script>
+
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input type="text" value="@Model.Name" disabled="disabled" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ProjectType"></label>
+                <input type="text" value="@Html.DisplayFor(m=>Model.ProjectType)" disabled="disabled" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea id="txtContent" name="txtContent" asp-for="Description"></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="DateTime"></label>
+                <input type="text" value="@Model.DateTime.ToPersianDigitalDateTimeString()" disabled="disabled" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProjectAndMedias"></label>
+                <div id="multipleGrid"></div>
+            </div>
+
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-block btn-primary py-4">ویرایش</a>
+
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("PartialViews/_GalleryBrowserPV")

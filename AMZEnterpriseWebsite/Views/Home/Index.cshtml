@@ -1,0 +1,253 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model AMZEnterpriseWebsite.Models.ViewModels.HomeVM
+@{
+    ViewData["Title"] = @Model.Setting.HomeMetaTitle;
+}
+@section Styles
+{
+    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css" />
+}
+@section Scripts
+{
+    <script src="~/lib/jarallax/jarallax.min.js"></script>
+    <script src="~/lib/OwlCarousel2/owl.carousel.min.js"></script>
+    <script src="~/lib/shave/jquery.shave.min.js"></script>
+    <script>
+        website.slideShow('#testimonials_owl_carousel');
+        website.shaveText(".blog-card-body-text");
+    </script>
+}
+
+
+<!-- Top Slider Start -->
+<section id="slider-area">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/img/slideshow/1.jpg" class="d-block w-100" alt="AMZEnterprise_SoftwareDesign">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>توسعه نرم افزار</h5>
+                    <p>
+                        طراحی نرم افزار های دسکتاپ با آخرین تکنولوژی های مایکروسافت
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/img/slideshow/2.jpg" class="d-block w-100" alt="AMZEnterprise_WebDevelopment">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>طراحی وبسایت</h5>
+                    <p>
+                        طراحی و پیاده سازی انواع وبسایت واکنش گرا مطابق با سلیقه شما
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/img/slideshow/3.jpg" class="d-block w-100" alt="AMZEnterprise_Training">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>آموزش و تدریس</h5>
+                    <p>
+                        آموزش خصوصی برنامه نویسی و نرم افزار ها به دانشجویان
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">قبلی</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">بعدی</span>
+        </a>
+    </div>
+</section>
+<!-- Top Slider End -->
+<!-- Description Start -->
+<section id="descritpion-area">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 order-lg-1 order-md-1 order-sm-1 order-1 m-0">
+                <div class="parallax-card">
+                    <h2 class="parallax-card-title">طراحی وبسایت</h2>
+                    <p class="parallax-card-content" data-aos="zoom-in-up">
+                        اینجا میتونی انواع وبسایت های شرکتی ، تجاری ، شخصی ، فروشگاهی و ... را با بهترین کیفیت و مناسب ترین قیمت سفارش بدی !
+                        پایین تر میتونی تعدادی از نمونه کارهای من در این زمینه را ببینی ! تمامی این وبسایت ها با آخرین تکنولوژی های موجود طراحی و توسعه پیدا کرده اند و کاملا واکنش گرا می باشند و در انواع صفحه های نمایش به خوبی نمایش داده می شوند.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-2 order-2">
+                <div class="parallax parallax1 jarallax"></div>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 order-lg-3 order-md-4 order-sm-4 order-4">
+                <div class="parallax parallax2 jarallax"></div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 order-lg-4 order-md-3 order-sm-3 order-3">
+                <div class="parallax-card">
+                    <h3 class="parallax-card-title">توسعه نرم افزار های اتوماسیون ، اداری و حسابداری</h3>
+                    <p class="parallax-card-content" data-aos="zoom-in-up">
+
+                        سیستم های حسابداری و اتوماسیون اداری و هوشمند سازی کسب کار یکی از مهمترین مسائل هر کسب و کار موفق است. به منظور انجام این هدف مهم من میتوانم انواع این سیستم ها را مطابق با اهداف شما طراحی کنم !
+
+
+                    </p>
+                    <a asp-controller="Project" asp-action="Registration" class="btn btn-block btn-primary py-5" data-aos="fade-up">همین الان سفارش بده !</a>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 order-lg-5 order-md-5 order-sm-5 order-5">
+                <div class="parallax-card">
+                    <h5 class="parallax-card-title">آموزش توسعه نرم افزار</h5>
+                    <p class="parallax-card-content" data-aos="zoom-in-up">
+                        اطلاعات کامل نرم افزار ها و وبسایت ها کدنویسی شده توسط من به طور دقیق و منظم در اختیار شما سفارش دهنده گرامی قرار میگیره!
+                        <br />
+                        همچنین دانشجویان گرامی که نیاز به یادگیری برنامه نویسی ، توسعه نرم افزار یا یادگیری نرم افزار های خاص دارند می توانند به بنده اطلاع دهند تا در اولین فرصت این موارد را به ایشان منتقل کنم.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 order-lg-6 order-md-6 order-sm-6 order-6">
+                <div class="parallax parallax3 jarallax"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Description End -->
+<!-- Projects Start -->
+<section id="projects-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 area-title">
+                <p>نمونه پروژه ها</p>
+            </div>
+
+            @foreach (var proj in Model.Projects)
+            {
+                if (proj.ProjectAndMedias.Any(m => m.Media != null))
+                {
+                    <div class="col-lg-4 col-md-3 col-sm-12 col-12">
+                        <div class="project-card" data-aos="zoom-in-up">
+                            <div class="project-card-header">
+                                <img src="@MediaSourceInView.GetSource(proj.ProjectAndMedias.FirstOrDefault()?.Media)" alt="@proj.Name">
+                            </div>
+                            <div class="project-card-body">
+                                <p class="h3">@proj.Name</p>
+                                <a asp-controller="Project" asp-action="Details" asp-route-id="@proj.Id" class="btn btn-primary mt-3">
+                                    <span class="fa fa-search"></span>
+                                    <span>جزئیات</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+            <div class="col-12">
+                <a asp-controller="Project" asp-action="Index" class="btn btn-secondary btn-block p-3">
+                    مشاهده همه ی نمونه کارها
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Project End -->
+<!-- Services Start -->
+<section id="services-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-12 area-title">
+                <p>خدمات و پشتیبانی</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="service-card">
+                    <span class="fab fa-chrome"></span>
+                    <h3>وبسایت</h3>
+                    <p>
+                        طراحی انواع وبسایت های ریسپانسیو
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="service-card">
+                    <span class="fa fa-mobile"></span>
+                    <h3>وب اپلیکیشین</h3>
+                    <p>
+                        ساخت و طراحی وب اپلیکیشن برای سیستم عامل های اندروید و آی او اس
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="service-card">
+                    <span class="fab fa-android"></span>
+                    <h3>نرم افزار اندروید</h3>
+                    <p>
+                        طراحی نرم افزار های اندروید سفارشی با بهترین کیفیت
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="service-card">
+                    <span class="fa fa-money-check"></span>
+                    <h3>هزینه</h3>
+                    <p>
+                        با کمترین هزینه پروژه های خود را به ما بسپارید!
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="service-card">
+                    <span class="fa fa-tag"></span>
+                    <h3>تخفیف</h3>
+                    <p>
+                        تخفیفات ویژه برای شما عزیزان
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="service-card">
+                    <span class="fa fa-user-friends"></span>
+                    <h3>پشتیبانی</h3>
+                    <p>
+                        پشتیبانی کامل محصولات و رفع خطاهای احتمالی
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Services End -->
+@await Component.InvokeAsync("SurveyCommentsSlider")
+
+
+<!-- Blog Start -->
+<section id="blog-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 area-title">
+                <p>آخرین مطالب</p>
+            </div>
+
+            @foreach (var post in Model.Posts)
+            {
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12" data-aos="slide-up">
+                    @await Component.InvokeAsync("BlogPostCard", new { blogPost = post })
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+<!-- Blog End -->
+@await Component.InvokeAsync("ContactBar")

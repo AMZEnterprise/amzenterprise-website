@@ -1,0 +1,146 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model AMZEnterpriseWebsite.Infrastructure.PaginatedList<Post>
+
+@{
+    ViewData["Title"] = "نتایج جستجو";
+}
+
+@section Scripts
+{
+
+    <script src="~/lib/shave/jquery.shave.min.js"></script>
+
+    <script>
+        website.shaveText(".blog-card-body-text");
+    </script>
+
+}
+
+<section id="search-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row">
+
+            @await Component.InvokeAsync("BlogSidebar")
+
+
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12 order-lg-1 order-md-0 order-sm-0 order-0" id="blog-posts">
+                <div class="row">
+
+                    <div class="col-12 mt-5" id="search-result-label">
+                        <p>
+                            نتایج جستجو برای :
+                            <span>@ViewData["SearchQuery"]</span>
+                        </p>
+                        <p>
+                            @if (Model.Count() > 0)
+                            {
+                                <span>@ViewData["TotalCount"]</span>
+                                <span>مطلب </span>
+                            }
+                            else
+                            {
+                                <span>هیچ نتیجه ای یافت نشد </span>
+                            }
+                        </p>
+                    </div>
+
+                    <div class="col-12">
+
+
+                        @foreach (var post in Model)
+                        {
+                            @await Component.InvokeAsync("BlogPostCard", new { blogPost = post })
+                        }
+
+                    </div>
+
+                    <div class="col-12 mt-5">
+
+                        <nav aria-label="paging">
+                            <ul class="pagination">
+
+                                @{
+                                    int pageNumber = (int)ViewData["CurrentPage"];
+                                }
+
+                                @if (Model.TotalPages >= 3)
+                                {
+                                    bool isNextDotPrinted = false;
+                                    bool isPrevDotPrinted = false;
+                                    for (int i = 1; i <= Model.TotalPages; i++)
+                                    {
+                                        if (i == pageNumber)
+                                        {
+                                            <li class="page-item active">
+                                                <a class="page-link" asp-route-pageNumber="@i" asp-route-searchString="@ViewData["SearchQuery"]" asp-route-archiveYear="@ViewData["ArchiveYear"]" asp-route-archiveMonth="@ViewData["ArchiveMonth"]">@i</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            if (i < Model.TotalPages - 1 && i > pageNumber + 2)
+                                            {
+                                                if (!isNextDotPrinted)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" asp-route-pageNumber="@(pageNumber+1)" asp-route-searchString="@ViewData["SearchQuery"]" asp-route-archiveYear="@ViewData["ArchiveYear"]" asp-route-archiveMonth="@ViewData["ArchiveMonth"]">...</a>
+                                                    </li>
+                                                    isNextDotPrinted = true;
+                                                }
+                                                else
+                                                {
+                                                    continue;
+                                                }
+                                            }
+                                            else if (i < pageNumber - 2)
+                                            {
+                                                if (!isPrevDotPrinted)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" asp-route-pageNumber="1" asp-route-searchString="@ViewData["SearchQuery"]" asp-route-archiveYear="@ViewData["ArchiveYear"]" asp-route-archiveMonth="@ViewData["ArchiveMonth"]">...</a>
+                                                    </li>
+                                                    isPrevDotPrinted = true;
+                                                }
+                                                else
+                                                {
+                                                    continue;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" asp-route-pageNumber="@i" asp-route-searchString="@ViewData["SearchQuery"]" asp-route-archiveYear="@ViewData["ArchiveYear"]" asp-route-archiveMonth="@ViewData["ArchiveMonth"]">@i</a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 1; i <= Model.TotalPages; i++)
+                                    {
+                                        if (i == pageNumber)
+                                        {
+                                            <li class="page-item active">
+                                                <a class="page-link" asp-route-pageNumber="@i" asp-route-searchString="@ViewData["SearchQuery"]" asp-route-archiveYear="@ViewData["ArchiveYear"]" asp-route-archiveMonth="@ViewData["ArchiveMonth"]">@i</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item">
+                                                <a class="page-link" asp-route-pageNumber="@i" asp-route-searchString="@ViewData["SearchQuery"]" asp-route-archiveYear="@ViewData["ArchiveYear"]" asp-route-archiveMonth="@ViewData["ArchiveMonth"]">@i</a>
+                                            </li>
+                                        }
+                                    }
+                                }
+
+                            </ul>
+                        </nav>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

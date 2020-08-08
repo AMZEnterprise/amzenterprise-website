@@ -1,0 +1,50 @@
+﻿@using System.Security.Cryptography
+@using AMZEnterpriseWebsite.Models.ViewModels
+@model ArticleCommentTreeViewModel
+
+
+
+@if (Model.Comments.Any(s => (s.ParentId == Model.CommentSeed)))
+{
+    foreach (var node in Model.Comments)
+    {
+        if ((node.ParentId == Model.CommentSeed))
+        {
+
+            var inner = new ArticleCommentTreeViewModel { CommentSeed = node.Id, Comments = Model.Comments };
+
+            <div class="card mt-2 w-100">
+
+                <div class="card-body @(node.Username == null ? "admin-comment" : "")">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                <strong>@(node.Username == null ? "نویسنده" : node.Username)</strong>
+
+                                <span class="float-right ml-3">@node.DateTime.ToPersianDigitalDateTimeString()</span>
+                                <span class="float-right text-danger">@(node.IsEdited == true ? "ویرایش شده" : "")</span>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <p>
+                                @node.Body
+                            </p>
+
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="#commentForm" class="btn btn-secondary text-white ml-2 answerBtn" data-parentid="@node.Id" data-parentuser="@(node.Username ?? "نویسنده")"> <i class="fa fa-reply"></i> پاسخ</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @await Component.InvokeAsync("Comments", new { commentTree = inner })
+
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+}

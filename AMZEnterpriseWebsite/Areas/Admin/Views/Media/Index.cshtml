@@ -1,0 +1,123 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model AMZEnterpriseWebsite.Infrastructure.PaginatedList<Media>
+
+@{
+    ViewData["Title"] = "رسانه ها";
+}
+
+<section id="topLabel">
+    <div class="container-fluid">
+        <div class="row text-white">
+            <div class="col-12">
+                <h2><span class="fas fa-music"></span>رسانه ها</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a asp-action="Create" class="btn btn-outline-success btn-block py-5 rounded-0 mt-1">
+    <span class="fa fa-plus"></span>
+    <span>اضافه کردن</span>
+</a>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12">
+            <form method="get">
+                <div class="input-group">
+                    <input type="search" value="@ViewData["CurrentFilter"]" name="searchString" placeholder="جستجو بر روی نام فایل و اندازه ..." class="form-control" />
+                    <div class="input-group-append" title="جستجو">
+                        <button class="btn btn-danger">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-6">
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-secondary btn-block @nextDisabled">
+                <span class="fa fa-angle-right"></span>
+                <span class="ml-3">بعدی</span>
+            </a>
+        </div>
+        <div class="col-6">
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-secondary btn-block @prevDisabled">
+                <span class="mr-3">قبلی</span>
+                <span class="fa fa-angle-left"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive mt-1">
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">
+                        نام
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SizeSortParm"]">
+                        اندازه (مگابایت)
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">
+                        تاریخ
+                    </a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @{
+                            var size = FileUploadUtil.ByteToMegabyteConvert(item.Size);
+                        }
+                        @Html.DisplayFor(modelItem => size)
+                    </td>
+                    <td>
+                        <span>@item.DateTime.ToPersianDigitalDateTimeString()</span>
+                    </td>
+
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning" title="جزئیات">
+                            <span class="fa fa-list"></span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" title="حذف">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

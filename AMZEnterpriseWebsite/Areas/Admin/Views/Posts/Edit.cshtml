@@ -1,0 +1,243 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = "ویرایش پست";
+
+    Dictionary<string, string> PVModel = new Dictionary<string, string>();
+    PVModel.Add("MainTitle", "پست ها");
+    PVModel.Add("Title", "ویرایش");
+    PVModel.Add("Style", "bg-primary");
+    PVModel.Add("Icon", "fa fa-newspaper");
+}
+
+@section Styles
+{
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-datetime-persian/dist/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/amz-gallerybrowser/amz-gallerybrowser.css" />
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/ckeditor_4.12.1_full/ckeditor.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/config.js"></script>
+    <script src="~/lib/ckeditor_4.12.1_full/adapters/jquery.js"></script>
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script>
+
+        $('.js-example-basic-multiple').select2({
+            multiple: true,
+            dir: "rtl",
+            ajax: {
+                url: '/Admin/Posts/GetAllTags',
+                data: function (params) {
+                    return {
+                        q: params.term// search term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.items
+                    };
+                },
+                minimumInputLength: 2,
+                width: 'resolve'
+            }
+        });
+
+        $('form').submit(function (e) {
+            var validator = $('form').validate();
+            //If form was valid
+            if (validator.checkForm()) {
+
+                var tagsIds = $('.js-example-basic-multiple').select2('val');
+                var tagsString = "";
+                tagsIds.forEach(function (element) {
+                    tagsString += element + ",";
+                });
+                $('#tags').val(tagsString);
+            } else {
+                e.preventDefault();
+            }
+        });
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/Posts/GetPostTags",
+            data: { postId: @Model.Id.ToString() },
+            dataType: "json",
+            success: function(data) {
+
+                var arr = data.items;
+                for (var i = 0; i < arr.length; i++) {
+
+                    var newOption = new Option(arr[i].text, arr[i].id, true, true);
+                    $(".js-example-basic-multiple").append(newOption).trigger('change');
+                }
+
+            }
+        });
+
+    </script>
+
+    <script src="~/lib/bootstrap-datetime-persian/dist/jquery.md.bootstrap.datetimepicker.js"></script>
+
+    <script>
+        $('#date1').MdPersianDateTimePicker({
+            targetTextSelector: '#releasedate',
+            targetDateSelector: '#releasedate-hide',
+            dateFormat: 'yyyy-MM-dd HH:mm:ss',
+            isGregorian: false,
+            enableTimePicker: true,
+            disableBeforeToday: true
+        });
+
+
+        $("#releasedate-hide").val($("#releasedate").val());
+
+        datePickerHider();
+
+        function datePickerHider() {
+            if ($("#post-status-select").val() === "0") {
+                $("#datepicker").hide();
+            } else {
+                $("#datepicker").show();
+            }
+        }
+
+        $("#post-status-select").change(function () {
+            datePickerHider();
+        });
+
+
+    </script>
+
+    <script src="~/lib/amz-gallerybrowser/amz-gallerybrowser.js"></script>
+    <script>
+        AMZGalleryBrowser.Init({
+            url: "/api/AMZGalleryBrowser/GetGallery",
+            itemsPerPage: 8,
+            selectionType: "single",
+            ckeditorId: "txtContent"
+        });
+
+
+        $.ajax({
+            url: "/api/AMZGalleryBrowser/GetGalleryItemDetails",
+            data: {
+                id: @Model.MediaId
+            },
+            dataType: "json",
+            success: function (data) {
+                document.getElementById("media-preview").setAttribute("src", data.link);
+            }
+        });
+
+    </script>
+}
+
+<partial name="PartialViews/_EditPV" model="@PVModel" />
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 m-auto">
+            <form asp-action="Edit">
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="DateTime" />
+                <input type="hidden" asp-for="UserId"/>
+
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title"></span>
+                </div>
+
+                <div class="form-group">
+                    <img src="~/img/panel/gallery-browser/img.png" alt="" class="img-fluid mt-5" id="media-preview" />
+                    <input type="hidden" asp-for="MediaId" id="input-mediaId" />
+                    <button class="btn btn-block btn-secondary" type="button" id="btn-selectMedia">انتخاب تصویر اصلی مطلب</button>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Body"></label>
+                    <textarea id="txtContent" asp-for="Body"></textarea>
+                    <span asp-validation-for="Body"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="PostAndTags"></label>
+                    <select class="js-example-basic-multiple form-control" asp-for="PostAndTags"></select>
+                    <span asp-validation-for="PostAndTags"></span>
+                    <input type="hidden" id="tags" name="tags" />
+                </div>
+
+
+
+                <div class="form-group">
+                    <label asp-for="Status"></label>
+                    <select asp-for="Status" class="custom-select" asp-items="Html.GetEnumSelectList<PostStatus>()" id="post-status-select"></select>
+                    <span asp-validation-for="Status"></span>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div id="datepicker">
+                        <label>زمان انتشار</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text cursor-pointer" id="date1">
+                                    <span class="fa fa-calendar-alt"></span>
+                                </span>
+                            </div>
+
+                            @if (Model.Status == PostStatus.Pending)
+                            {
+                                <input type="text" id="releasedate" class="form-control" placeholder="انتخاب تاریخ انتشار مطلب ..."
+                                       aria-label="date1" aria-describedby="date1" value="@Model.LastEditDate">
+                            }
+                            else
+                            {
+                                <input type="text" id="releasedate" class="form-control" placeholder="انتخاب تاریخ انتشار مطلب ..."
+                                       aria-label="date1" aria-describedby="date1">
+                            }
+
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" id="releasedate-hide" class="form-control"
+                           aria-label="date11" aria-describedby="date11" name="pendingdate">
+
+
+                    <span asp-validation-for="DateTime"></span>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="CategoryId"></label>
+                    <select asp-for="CategoryId" class="custom-select" asp-items="ViewBag.CategoryId"></select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IsCommentsOn"></label>
+                    <input type="checkbox" asp-for="IsCommentsOn" class="custom-checkbox"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="ذخیره" class="btn btn-block btn-primary py-4">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+
+@await Html.PartialAsync("PartialViews/_GalleryBrowserPV")

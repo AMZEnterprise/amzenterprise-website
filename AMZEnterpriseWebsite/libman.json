@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "datatables@1.10.19",
+      "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "dropzone@5.5.1",
+      "destination": "wwwroot/lib/dropzone/"
+    },
+    {
+      "library": "popper.js@1.15.0",
+      "destination": "wwwroot/lib/popper.js/"
+    },
+    {
+      "library": "aos@2.3.4",
+      "destination": "wwwroot/lib/aos/"
+    },
+    {
+      "library": "shave@2.5.4",
+      "destination": "wwwroot/lib/shave/"
+    },
+    {
+      "library": "select2@4.0.10",
+      "destination": "wwwroot/lib/select2/"
+    },
+    {
+      "library": "jarallax@1.11.1",
+      "destination": "wwwroot/lib/jarallax/"
+    },
+    {
+      "library": "OwlCarousel2@2.3.4",
+      "destination": "wwwroot/lib/OwlCarousel2/"
+    }
+  ]
+}

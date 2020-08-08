@@ -1,0 +1,82 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model IEnumerable<Project>
+@{
+    ViewData["Title"] = "پروژه ها";
+}
+
+@await Html.PartialAsync("PartialViews/_BreadcrumbPV")
+
+<!-- Projects Start -->
+<section id="all-projects-area" class="area-mt">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 area-title">
+                <p>نمونه پروژه ها</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <div class="row align-content-center justify-content-center no-gutters">
+
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.Other" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.Other ? "btn-secondary" : "btn-primary")">همه پروژه ها</a>
+                    </div>
+
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.TemplateDesign" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.TemplateDesign ? "btn-secondary" : "btn-primary")">طراحی قالب</a>
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.Website" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.Website ? "btn-secondary" : "btn-primary")">وبسایت</a>
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.Desktop" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.Desktop ? "btn-secondary" : "btn-primary")">دسکتاپ</a>
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.MobileApplication" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.MobileApplication ? "btn-secondary" : "btn-primary")">اپلیکیشن</a>
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.Seo" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.Seo ? "btn-secondary" : "btn-primary")">سئو</a>
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.Optimization" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.Optimization ? "btn-secondary" : "btn-primary")">بهینه سازی</a>
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-6 col-12">
+                        <a asp-controller="Project" asp-action="Index" asp-route-currentFilter="@ProjectType.Teaching" class="btn btn-block @((ProjectType) ViewData["filter"] == ProjectType.Teaching ? "btn-secondary" : "btn-primary")">آموزش</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            @foreach (var proj in Model)
+            {
+                if (proj.ProjectAndMedias.Any(m => m.Media != null))
+                {
+                    <div class="col-lg-4 col-md-3 col-sm-12 col-12">
+                        <div class="project-card" data-aos="zoom-in-up">
+                            <div class="project-card-header">
+                                <img src="@MediaSourceInView.GetSource(proj.ProjectAndMedias.FirstOrDefault()?.Media)" alt="@proj.Name">
+                            </div>
+                            <div class="project-card-body">
+                                <p class="h3">@proj.Name</p>
+                                <a asp-controller="Project" asp-action="Details" asp-route-id="@proj.Id" class="btn btn-primary mt-3">
+                                    <span class="fa fa-search"></span>
+                                    <span>جزئیات</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+
+
+
+
+    </div>
+</section>
+<!-- Project End -->

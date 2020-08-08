@@ -1,0 +1,81 @@
+﻿@using AMZEnterpriseWebsite.Infrastructure
+@model Project
+
+@{
+    ViewData["Title"] = "جزئیات پروژه";
+    ViewData["BreadcrumbTitle"] = Model.Name;
+}
+
+@section Styles
+{
+    <link href="~/lib/OwlCarousel2/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css" rel="stylesheet" />
+}
+@section Scripts
+{
+    <script src="~/lib/OwlCarousel2/owl.carousel.min.js"></script>
+    <script>
+        website.slideShow('#single_project_owl_carousel');
+    </script>
+}
+@await Html.PartialAsync("PartialViews/_BreadcrumbPV")
+
+<section id="single-project-area" class="area-mt">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 col-sm-12 col-12 m-auto">
+                <div class="project-details-card">
+                    <p class="project-details-card-info">
+                        <span class="project-details-card-title">
+                            @Model.Name
+                        </span>
+                        <span>|</span>
+                        <span>نوع پروژه : @Html.DisplayFor(m => m.ProjectType)</span>
+                    </p>
+                    <div class="project-details-card-header">
+                        <div class="owl-carousel owl-theme" id="single_project_owl_carousel">
+
+                            @foreach (var media in Model.ProjectAndMedias)
+                            {
+                                if (media.Media.MediaFileType == MediaFileType.Img)
+                                {
+                                    <img src="@MediaSourceInView.GetSource(media.Media)" alt="" class="item" />
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="project-details-card-body">
+                        @Html.Raw(Model.Description)
+
+
+                    </div>
+                    <div class="project-details-card-footer">
+                        @{
+                            bool hasOtherFiles = Model.ProjectAndMedias.Any(pm => pm.Media.MediaFileType != MediaFileType.Img);
+                        }
+                        @if (hasOtherFiles)
+                        {
+                            <p>
+                                <span>فایل (ها ضمیمه)</span> :
+                                <br/>
+                                @foreach (var media in Model.ProjectAndMedias)
+                                {
+                                    if (media.Media.MediaFileType != MediaFileType.Img)
+                                    {
+                                        <a href="@MediaSourceInView.GetSource(media.Media)">@media.Media.Name</a>
+                                        <br/>
+                                    }
+                                }
+                            </p>
+                        }
+                      
+                        <p>
+                            تاریخ اتمام پروژه :
+                            @Model.DateTime.ToPersianDateString()
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

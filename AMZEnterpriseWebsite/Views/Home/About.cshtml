@@ -1,0 +1,156 @@
+﻿@model AMZEnterpriseWebsite.Models.ViewModels.AboutVM
+
+@{
+    ViewData["Title"] = "درباره من";
+}
+
+@await Html.PartialAsync("PartialViews/_BreadcrumbPV")
+
+<section id="about-me-area">
+    <div class="container-fluid">
+        <div class="row area-mt">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 order-lg-1 order-md-2 order-sm-2 order-2">
+                <div class="col-12 area-title">
+                    <p>درباره من</p>
+                </div>
+                <div data-aos="zoom-in-up">
+                    <p class="text-effect">
+                        علی مومن زاده هستم . برنامه نویس و توسعه دهنده دات نت و وبسایت.
+                        علاقه مند به یادگیری تکنولوژی های مختلف نرم افزاری بخصوص وب !
+                        فعالیت کدنویسی حرفه ای من از سال ۱۳۹۵ آغاز شد و تا به امروز ادامه دارد.
+                        همواره در حال توسعه و یادگیری موارد جدید تر هستم و آماده برای انجام و پذیرش
+                        پروژه های نرم افزاری مختلف هستم.
+                        تمرکز زیادی روی تکنولوژی های مایکروسافت دارم اما در زمان های مختلف
+                        به سایر مسائل و جنبه های مختلف نرم افزار ها و سیستم های مختلف می پردازم.
+                    </p>
+                    <br />
+                    <p class="text-effect">
+                        AMZEnterprise
+                        در واقع برند و لوگوی تجاری من هست که با این وبسایت به صورت رسمی از اون رونمایی کردم
+                        و در پروژه های آینده نیز ازش استفاده میکنم.
+                    </p>
+                    <br />
+                    <p class="text-effect">
+                        در واقع من یه دات نت کار حامی اپن سورس هستم !
+                        نرم افزار های مختلفی نوشتم که در زمان های مشخصی که در نظر دارم
+                        به صورت متن باز ارائه خواهم داد . شاید این کمترین
+                        حمایت من از جامعه برنامه نویسان باشد !
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 order-lg-2 order-md-1 order-sm-1 order-1 text-center">
+                <img src="~/img/about/me.jpg" alt="" class="img-fluid p-5">
+            </div>
+        </div>
+        <div class="row area-mt">
+            <div class="col-12 area-title">
+                <p>توانایی های من</p>
+            </div>
+            <div class="col-12">
+                <div class="row no-gutters" id="progress-area">
+
+                    @foreach (var item in Model.MyProgresses)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12" data-aos="zoom-in-up">
+                            <div class="progress-card">
+                                <p class="progress-card-title">
+                                    @item.Topic
+                                </p>
+                                <div class="progress-card-bar">
+                                    <div class="progress">
+                                        @{
+                                            var progressValue = item.ProgressValuePercentage;
+                                            string color = "";
+                                            if (progressValue < 30)
+                                            {
+                                                color = "bg-danger";
+                                            }
+                                            else if (progressValue < 80)
+                                            {
+                                                color = "bg-primary";
+                                            }
+                                            else
+                                            {
+                                                color = "bg-success";
+                                            }
+                                        }
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated @color" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: @progressValue%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row area-mt" id="results-area">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <img src="~/img/svg/certificate.svg" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="col-12 area-title">
+                    <p>افتخارات من</p>
+                </div>
+                <ul id="result-list" data-aos="zoom-in-up">
+
+                    <li  class="text-effect">
+                        <span class="fa fa-check result-ico"></span>
+                        تشکیل ، همکاری و مدیریت بخشی از تیم برنامه نویسی و طراحی وب پالیز
+                    </li>
+                    <li class="text-effect">
+                        <span class="fa fa-check result-ico"></span>
+                        همکاری در پروژه های مختلف سئو و بهینه سازی وبسایت
+                    </li>
+                    <li class="text-effect">
+                        <span class="fa fa-check result-ico"></span>
+                        طراحی و مدیریت وبسایت فروشگاهی و شرکتی
+                    </li>
+                    <li class="text-effect">
+                        <span class="fa fa-check result-ico"></span>
+                        طراحی و تولید سیستم اتوماسیون اداری و مدیریت مطب
+                    </li>
+                    <li class="text-effect">
+                        <span class="fa fa-check result-ico"></span>
+                        پیاده سازی نرم افزار های گوناگون تحت وب و دسکتاپ با معماری های بهینه و استاندارد های کدنویسی و بهینه سازی
+                    </li>
+                    <li class="text-effect">
+                        <span class="fa fa-check result-ico"></span>
+                        سابقه آموزش و تدریس خصوصی برنامه نویسی
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row area-mt">
+            <div class="col-12 area-title">
+                <p>حمایت مالی از من</p>
+            </div>
+            <div class="col-12">
+                <div data-aos="zoom-in-up">
+                    <p class="text-effect">
+                        در صورتی که از مطالب و محتوای سایت من راضی هستید و دوست دارید به من
+                        در بهتر کردن محتوا و افزایش امکانات وبسایت کمک کنید ، می توانید از من و مجموعه
+                        فعالیت هایم حمایت مالی
+                        (donate)
+                        کنید.
+                        <br />
+                        تمامی مبالغ پرداخت شده صرف بهبود و بهینه سازی محتوا و رایگان ساختن برخی از نرم افزار های من
+                        می شود . در صورتی که ایده ای برای پیاده سازی دارید و نیاز به برنامه نویس دارید می توانید آن
+                        را با من مطرح کنید . بسیار خوشحال خواهم شد.
+                    </p>
+                </div>
+                <div id="donate-box" data-aos="fade-up">
+                    <p class="text-effect">
+                        <span>کیف پول بیت کوین :</span>
+                        <span>@Model.Setting.BitcoinWalletKey</span>
+                        <br />
+                        <span>شماره کارت بانکی :</span>
+                        <span>@Model.Setting.BankId</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

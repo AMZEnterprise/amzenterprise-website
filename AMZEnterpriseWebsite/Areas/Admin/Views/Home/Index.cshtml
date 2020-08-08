@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "داشبورد";
+}
+
+
+<section id="topLabel">
+    <div class="container-fluid">
+        <div class="row text-white">
+            <div class="col-12 text-center py-5">
+                <h2><span class="fa fa-user"></span> پنل مدیریت</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="welcomeMessage">
+    <div class="container-fluid text-center text-white">
+        <div class="row">
+            <div class="col">
+                <h4>
+                    به پنل مدیریت وبسایت خوش آمدید
+                </h4>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-dark">
+                    <span class="fa fa-home"></span>
+                    بازگشت به سایت
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section>
+    <div class="container-fluid">
+        <div class="row my-5">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                <a asp-controller="Projects" asp-action="Index" class="btn btn-danger p-5 btn-block rounded-0 mt-lg-0 mt-md-0 mt-sm-3 mt-3"><span class="fa fa-code h4"></span>  <span class="h4">پروژه ها</span></a>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                <a asp-controller="Posts" asp-action="Index" class="btn btn-warning text-white p-5 btn-block rounded-0 mt-lg-0 mt-md-0 mt-sm-3 mt-3"><span class="fa fa-newspaper h4"></span>  <span class="h4">پست ها</span></a>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                <a asp-controller="Comments" asp-action="Index" class="btn btn-primary p-5 btn-block rounded-0 mt-lg-0 mt-md-0 mt-sm-3 mt-3"><span class="fa fa-comment h4"></span>  <span class="h4">نظرات</span></a>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                <a asp-controller="Settings" asp-action="Index" class="btn btn-success p-5 btn-block rounded-0 mt-lg-0 mt-md-0 mt-sm-3 mt-3"><span class="fa fa-cogs h4"></span>  <span class="h4">تنظیمات</span></a>
+            </div>
+        </div>
+    </div>
+</section>

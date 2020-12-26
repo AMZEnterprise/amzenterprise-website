@@ -10,11 +10,14 @@ namespace AMZEnterpriseWebsite.Data
 {
     public static class ApplicationDbInitializer
     {
-        public static void SeedData(UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+        public static void SeedData(
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             SeedRoles(roleManager);
             SeedUsers(userManager);
+            SeedSettings(context);
         }
 
         public static void SeedUsers(UserManager<ApplicationUser> userManager)
@@ -34,7 +37,7 @@ namespace AMZEnterpriseWebsite.Data
                     user.DateTime = DateTime.Now;
                     user.EmailConfirmed = true;
                     IdentityResult result = userManager.CreateAsync
-                        (user, "p@ss123").Result;
+                        (user, "p@Ss123").Result;
 
                     if (result.Succeeded)
                     {
@@ -64,5 +67,16 @@ namespace AMZEnterpriseWebsite.Data
             }
         }
 
+        public static void SeedSettings(ApplicationDbContext context)
+        {
+            if (!context.Settings.Any())
+            {
+                context.Settings.Add(new Setting()
+                {
+                    SiteName = "SiteName"
+                });
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -1,0 +1,113 @@
+﻿@model Setting
+
+@{
+    ViewData["Title"] = "حمایت مالی";
+}
+
+@await Html.PartialAsync("PartialViews/_BreadcrumbPV")
+
+<section id="donate-area">
+    <div class="container-fluid">
+        <div class="row area-mt">
+            <div class="col-12 area-title">
+                <p>حمایت مالی از من</p>
+            </div>
+            <div class="col-12 text-center">
+                <div data-aos="zoom-in-up">
+                    <p class="text-effect">
+                        سلام دوست من !
+                        در صورتی که از مطالب و محتوای سایت من راضی هستید و دوست دارید به من
+                        در بهتر کردن محتوا و افزایش امکانات وبسایت کمک کنید ، می تونید از من و مجموعه
+                        فعالیت هایم حمایت مالی
+                        (donate)
+                        کنید.
+                        <br/>
+                        تمامی مبالغ پرداخت شده صرف بهبود و بهینه سازی محتوا و رایگان ساختن برخی از نرم افزار های من
+                        می شود . در صورتی که ایده ای برای پیاده سازی دارید و نیاز به برنامه نویس دارید می توانید آن
+                        را با من مطرح کنید . بسیار خوشحال خواهم شد.
+                        <br />
+                        من یک برنامه نویس  تجاری اما حامی دنیای متن باز و ارائه نرم افزارهای آزاد هستم ! فعالیت هایی
+                        در این زمینه بروی گیت هاب و سایر پلتفرم ها دارم و سعی می کنم از هر موقعیتی برای
+                        افزایش توانایی خودم و کمک کردن به بقیه استفاده کنم !
+                        <br />
+                        در صورت امکان و اینکه دوست داشته باشید من این مسیر را خوشحال و خندون ادامه بدم و به شما ها
+                        بیشتر کمک کنم ، میتو نید با حمایت مالی با هر مقداری منو خوشحال کنید و کمک کنید
+                        که داخل این مسیر بمونم :)
+                    </p>
+                </div>
+                <div id="donate-box" data-aos="fade-up">
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName1) && !string.IsNullOrWhiteSpace(Model.WalletAddress1))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName1 : </span>
+                            <span class="wallet-address">@Model.WalletAddress1</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName2) && !string.IsNullOrWhiteSpace(Model.WalletAddress2))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName2 : </span>
+                            <span class="wallet-address">@Model.WalletAddress2</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName3) && !string.IsNullOrWhiteSpace(Model.WalletAddress3))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName3 : </span>
+                            <span class="wallet-address">@Model.WalletAddress3</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName4) && !string.IsNullOrWhiteSpace(Model.WalletAddress4))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName4 : </span>
+                            <span class="wallet-address">@Model.WalletAddress4</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName5) && !string.IsNullOrWhiteSpace(Model.WalletAddress5))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName5 : </span>
+                            <span class="wallet-address">@Model.WalletAddress5</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName6) && !string.IsNullOrWhiteSpace(Model.WalletAddress6))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName6 : </span>
+                            <span class="wallet-address">@Model.WalletAddress6</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName7) && !string.IsNullOrWhiteSpace(Model.WalletAddress7))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName7 : </span>
+                            <span class="wallet-address">@Model.WalletAddress7</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName8) && !string.IsNullOrWhiteSpace(Model.WalletAddress8))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName8 : </span>
+                            <span class="wallet-address">@Model.WalletAddress8</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName9) && !string.IsNullOrWhiteSpace(Model.WalletAddress9))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName9 : </span>
+                            <span class="wallet-address">@Model.WalletAddress9</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.WalletName10) && !string.IsNullOrWhiteSpace(Model.WalletAddress10))
+                    {
+                        <p>
+                            <span class="wallet-name">@Model.WalletName10 : </span>
+                            <span class="wallet-address">@Model.WalletAddress10</span>
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

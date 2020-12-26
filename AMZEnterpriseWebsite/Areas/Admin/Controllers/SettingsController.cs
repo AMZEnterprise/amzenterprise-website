@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AMZEnterpriseWebsite.Data;
@@ -71,7 +72,7 @@ namespace AMZEnterpriseWebsite.Areas.Admin.Controllers
 
 
                         //Copying New Profile Image
-                        string newFileName = setting.SiteName + Path.GetExtension(files[0].FileName);
+                        string newFileName = Guid.NewGuid() + Path.GetExtension(files[0].FileName);
                         var fullPath = Path.Combine(uploadPath, newFileName);
                         using (var fs = new FileStream(fullPath, FileMode.Create))
                         {

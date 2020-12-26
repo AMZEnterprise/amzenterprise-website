@@ -64,10 +64,46 @@ namespace AMZEnterpriseWebsite.Models
         public string HomeMetaDescription { get; set; }
 
 
-        //Banking Info
-        [Display(Name = "شماره حساب بانکی")]
-        public string BankId { get; set; }
-        [Display(Name = "آدرس کیف پول بیت کوین")]
-        public string BitcoinWalletKey { get; set; }
+        //Wallets
+        [Display(Name = "نام کیف پول 1")]
+        public string WalletName1 { get; set; }
+        [Display(Name = "آدرس کیف پول 1")]
+        public string WalletAddress1 { get; set; }
+        [Display(Name = "نام کیف پول 2")]
+        public string WalletName2 { get; set; }
+        [Display(Name = "آدرس کیف پول 2")]
+        public string WalletAddress2 { get; set; }
+        [Display(Name = "نام کیف پول 3")]
+        public string WalletName3 { get; set; }
+        [Display(Name = "آدرس کیف پول 3")]
+        public string WalletAddress3 { get; set; }
+        [Display(Name = "نام کیف پول 4")]
+        public string WalletName4 { get; set; }
+        [Display(Name = "آدرس کیف پول 4")]
+        public string WalletAddress4 { get; set; }
+        [Display(Name = "نام کیف پول 5")]
+        public string WalletName5 { get; set; }
+        [Display(Name = "آدرس کیف پول 5")]
+        public string WalletAddress5 { get; set; }
+        [Display(Name = "نام کیف پول 6")]
+        public string WalletName6 { get; set; }
+        [Display(Name = "آدرس کیف پول 6")]
+        public string WalletAddress6 { get; set; }
+        [Display(Name = "نام کیف پول 7")]
+        public string WalletName7 { get; set; }
+        [Display(Name = "آدرس کیف پول 7")]
+        public string WalletAddress7 { get; set; }
+        [Display(Name = "نام کیف پول 8")]
+        public string WalletName8 { get; set; }
+        [Display(Name = "آدرس کیف پول 8")]
+        public string WalletAddress8 { get; set; }
+        [Display(Name = "نام کیف پول 9")]
+        public string WalletName9 { get; set; }
+        [Display(Name = "آدرس کیف پول 9")]
+        public string WalletAddress9 { get; set; }
+        [Display(Name = "نام کیف پول 10")]
+        public string WalletName10 { get; set; }
+        [Display(Name = "آدرس کیف پول 10")]
+        public string WalletAddress10 { get; set; }
     }
 }

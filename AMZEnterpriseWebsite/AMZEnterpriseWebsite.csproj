@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
 
@@ -42,6 +42,10 @@
 
 
   <ItemGroup>
+    <Folder Include="wwwroot\log\" />
+    <Folder Include="wwwroot\media\img\" />
+    <Folder Include="wwwroot\media\other\" />
+    <Folder Include="wwwroot\media\profiles\" />
     <Folder Include="wwwroot\media\sound\" />
     <Folder Include="wwwroot\media\video\" />
   </ItemGroup>

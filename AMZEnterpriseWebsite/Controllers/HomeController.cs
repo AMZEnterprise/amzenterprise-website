@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AMZEnterpriseWebsite.Data;
+﻿using AMZEnterpriseWebsite.Data;
 using AMZEnterpriseWebsite.Models;
 using AMZEnterpriseWebsite.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartBreadcrumbs.Attributes;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AMZEnterpriseWebsite.Controllers
 {
@@ -84,11 +84,17 @@ namespace AMZEnterpriseWebsite.Controllers
 
             return View(surveyComment);
         }
+
         [Breadcrumb("درباره")]
         public IActionResult About()
         {
             return View(_aboutVm);
         }
 
+        [Breadcrumb("حمایت مالی")]
+        public IActionResult Donate()
+        {
+            return View(_context.Settings.FirstOrDefault(s => s.Id == 1));
+        }
     }
 }

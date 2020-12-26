@@ -171,7 +171,14 @@ namespace AMZEnterpriseWebsite
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            ApplicationDbInitializer.SeedData(userManager, roleManager);
+            //Ensure Database Create If It doesn't exists
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.EnsureCreated();
+
+                ApplicationDbInitializer.SeedData(userManager, roleManager, context);
+            }
         }
     }
 }
